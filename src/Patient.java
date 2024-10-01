@@ -34,6 +34,10 @@ class Patient extends User {
         testResults.add(testResult);
     }
 
+    public void removeTestResult(String testResult){
+        testResults.remove(testResult);
+    }
+
     public void addPrescription(String prescription) {
         prescriptions.add(prescription);
     }
