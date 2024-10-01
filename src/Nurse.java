@@ -15,10 +15,11 @@ class Nurse extends User {
 
     public Patient choosePatient() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose a patient by ID:");
+        System.out.println("Patients:");
         for (int i = 0; i < patients.size(); i++) {
             System.out.println((i + 1) + ". " + patients.get(i).userName + " (ID: " + patients.get(i).userID + ")");
         }
+        System.out.print("Choose a patient by ID: ");
         int choice = scanner.nextInt() - 1;
         return patients.get(choice);
     }
