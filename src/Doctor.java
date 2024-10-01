@@ -32,12 +32,24 @@ class Doctor extends User {
         System.out.println("Prescription added for " + patient.userName);
     }
 
-    public void createTestResult(Patient patient) {
+    public void updateTestResult(Patient patient) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter test result for " + patient.userName + ": ");
-        String testResult = scanner.nextLine();
-        patient.addTestResult(testResult);
-        System.out.println("Test result added for " + patient.userName);
+        System.out.println("\n1. Create test result");
+        System.out.println("2. Delete test result");
+        System.out.print("Enter choice: ");
+        String choice=scanner.nextLine();
+
+        if(choice.equals("1")){
+            System.out.print("Enter test result to add for " + patient.userName + ": ");
+            String testResult = scanner.nextLine();
+            patient.addTestResult(testResult);
+            System.out.println("Test result updated for " + patient.userName);
+        } else if(choice.equals("2")){
+            System.out.print("Enter test result to delete for " + patient.userName + ": ");
+            String testResult = scanner.nextLine();
+            patient.removeTestResult(testResult);
+            System.out.println("Test result updated for " + patient.userName);
+        }
     }
 
     public void viewTestResults(Patient patient) {
