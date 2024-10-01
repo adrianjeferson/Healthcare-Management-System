@@ -114,7 +114,7 @@ public class Medical_InformationSystem {
                             Patient selectedPatient = doctor.choosePatient();
                             while (true) {
                                 System.out.println("\n1. Create Prescription");
-                                System.out.println("2. Create Test Result");
+                                System.out.println("2. Update Test Result");
                                 System.out.println("3. View Test Results");
                                 System.out.println("4. View Prescriptions");
                                 System.out.println("5. Compute Billing");
@@ -129,7 +129,7 @@ public class Medical_InformationSystem {
                                         doctor.createPrescription(selectedPatient);
                                         break;
                                     case "2":
-                                        doctor.createTestResult(selectedPatient);
+                                        doctor.updateTestResult(selectedPatient);
                                         break;
                                     case "3":
                                         doctor.viewTestResults(selectedPatient);
