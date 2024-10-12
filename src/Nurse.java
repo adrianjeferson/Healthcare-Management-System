@@ -13,17 +13,75 @@ class Nurse extends User {
         System.out.println("Patient " + patient.userName + " added.");
     }
 
-    public Patient choosePatient() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Patients:");
-        for (int i = 0; i < patients.size(); i++) {
-            System.out.println((i + 1) + ". " + patients.get(i).userName + " (ID: " + patients.get(i).userID + ")");
+    public void removePatient() {
+        if (patients.isEmpty()) {
+            System.out.println("\nNo patients available to remove.");
+            return;
         }
-        System.out.print("Choose a patient by ID: ");
-        int choice = scanner.nextInt() - 1;
-        return patients.get(choice);
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("\nPatients:");
+            for (int i = 0; i < patients.size(); i++) {
+                System.out.println((i + 1) + ". " + patients.get(i).getUserName() + " (ID: " + patients.get(i).getUserID() + ")");
+            }
+            System.out.print("\nEnter the Patient ID to remove: ");
+            String patientId = scanner.nextLine();
+    
+            Patient patientToRemove = null;
+            for (Patient patient : patients) {
+                if (patient.getUserID().equals(patientId)) {
+                    patientToRemove = patient;
+                    break;
+                }
+            }
+    
+            if (patientToRemove != null) {
+                patients.remove(patientToRemove);
+                System.out.println("Patient " + patientToRemove.getUserName() + " has been removed.");
+                break;
+            } else {
+                System.out.println("No patient found with that ID. Please try again.");
+            }
+        }
+    }    
+
+    public Patient choosePatient() {
+        if(patients.isEmpty()){
+            System.out.println("\nNo patients available. Please add a patient first.");
+            return null;
+        }
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("\nPatients:");
+            for (int i = 0; i < patients.size(); i++) {
+                System.out.println((i + 1) + ". " + patients.get(i).userName + " (ID: " + patients.get(i).userID + ")");
+            }
+            System.out.print("\nChoose a patient by ID: ");
+            String choice = scanner.nextLine();
+            for (Patient patient:patients){
+                if (patient.userID.equals(choice)){
+                    System.out.println("\nPatient "+patient.userName);
+                    return patient;
+                }
+            }
+            System.out.println("No patient found with that ID. Please try again.");
+        }
     }
 
+    public Patient searchPatient(String searchTerm) {
+        for (Patient patient : this.patients) {
+            // Search by ID
+            if (patient.getUserID().equalsIgnoreCase(searchTerm)) {
+                return patient;
+            }
+            // Search by Name
+            if (patient.getUserName().equalsIgnoreCase(searchTerm)) {
+                return patient;
+            }
+        }
+        return null;  // Return null if no patient is found
+    }
+    
     public void viewTestResults(Patient patient) {
         patient.viewTestResults();
     }
