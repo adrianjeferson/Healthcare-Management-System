@@ -42,6 +42,10 @@ class Patient extends User {
         prescriptions.add(prescription);
     }
 
+    public void removePrescription(String prescription) {
+        prescriptions.remove(prescription);
+    }
+
     public void addBilling(double amount) {
         this.billingInfo += amount;
     }
