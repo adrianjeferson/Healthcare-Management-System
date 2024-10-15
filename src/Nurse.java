@@ -64,21 +64,31 @@ class Nurse extends User {
                     return patient;
                 }
             }
-            System.out.println("No patient found with that ID. Please try again.");
+            System.out.println("\nNo patient found with that ID. Please try again.");
         }
     }
 
-    public Patient searchPatient(String searchTerm) {
+    public Patient searchPatient(Scanner scanner) {
+        System.out.print("\nEnter Patient ID or Name to search: ");
+        String search = scanner.nextLine().trim();
+
+        if (search.isEmpty()) {
+            System.out.println("Search term cannot be empty. Please try again.");
+            return null; // Return null if input is invalid
+        }
+
         for (Patient patient : this.patients) {
             // Search by ID
-            if (patient.getUserID().equalsIgnoreCase(searchTerm)) {
+            if (patient.getUserID().equalsIgnoreCase(search)) {
                 return patient;
             }
             // Search by Name
-            if (patient.getUserName().equalsIgnoreCase(searchTerm)) {
+            if (patient.getUserName().equalsIgnoreCase(search)) {
                 return patient;
             }
         }
+        
+        System.out.println("\nNo patient found with the given ID or Name.");
         return null;  // Return null if no patient is found
     }
     
