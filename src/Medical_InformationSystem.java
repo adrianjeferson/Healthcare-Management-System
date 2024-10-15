@@ -322,39 +322,64 @@ public class Medical_InformationSystem {
                         Patient patient = new Patient(patientId, patientName, patientAge);
                         nurse.addPatient(patient);
                     } else if (choice.equals("2")) {
-                        // Choose an existing patient and display patient-specific actions
-                        Patient selectedPatient = nurse.choosePatient();
-                        if(selectedPatient!=null){
-                            while (true) {
-                                System.out.println("\n1. View Test Results");
-                                System.out.println("2. View Prescriptions");
-                                System.out.println("3. Compute Billing");
-                                System.out.println("4. Schedule Appointment");
-                                System.out.println("5. Back");
-                                System.out.print("Enter choice: ");
-                                String subChoice = scanner.nextLine();
+                        while (true) {
+                            // Choose an existing patient and display patient-specific actions
+                            System.out.println("\n1. Choose from list");
+                            System.out.println("2. Search for a patient");
+                            System.out.println("3. Back");
+                            System.out.print("Enter choice: ");
+                            String mychoice=scanner.nextLine().trim();
 
-                                // Execute the action based on the choice
-                                switch (subChoice) {
-                                    case "1":
-                                        nurse.viewTestResults(selectedPatient);
-                                        break;
-                                    case "2":
-                                        nurse.viewPrescriptions(selectedPatient);
-                                        break;
-                                    case "3":
-                                        nurse.computeBilling(selectedPatient);
-                                        break;
-                                    case "4":
-                                        nurse.scheduleAppointment(selectedPatient);
-                                        break;
-                                    case "5":
-                                        break;
-                                    default:
-                                        System.out.println("Invalid choice");
+                            Patient selectedPatient=null;
+
+                            if(mychoice.equals("1")){
+                                selectedPatient = nurse.choosePatient();
+                            } else if (mychoice.equals("2")) {
+                                selectedPatient = nurse.searchPatient(scanner);
+                    
+                                if (selectedPatient != null) {
+                                    System.out.println("\nPatient found: " + selectedPatient.getUserName() + " (ID: " + selectedPatient.getUserID() + ")");
+                                } else {
+                                    continue;
                                 }
-                                if (subChoice.equals("5")){
-                                    break;
+                            } else if (mychoice.equals("3")){
+                                break;
+                            } else {
+                                System.out.println("Invalid choice. Try again.");
+                            }
+
+                            if(selectedPatient!=null){
+                                while (true) {
+                                    System.out.println("\n1. View Test Results");
+                                    System.out.println("2. View Prescriptions");
+                                    System.out.println("3. Compute Billing");
+                                    System.out.println("4. Schedule Appointment");
+                                    System.out.println("5. Back");
+                                    System.out.print("Enter choice: ");
+                                    String subChoice = scanner.nextLine();
+
+                                    // Execute the action based on the choice
+                                    switch (subChoice) {
+                                        case "1":
+                                            nurse.viewTestResults(selectedPatient);
+                                            break;
+                                        case "2":
+                                            nurse.viewPrescriptions(selectedPatient);
+                                            break;
+                                        case "3":
+                                            nurse.computeBilling(selectedPatient);
+                                            break;
+                                        case "4":
+                                            nurse.scheduleAppointment(selectedPatient);
+                                            break;
+                                        case "5":
+                                            break;
+                                        default:
+                                            System.out.println("Invalid choice");
+                                    }
+                                    if (subChoice.equals("5")){
+                                        break;
+                                    }
                                 }
                             }
                         }
