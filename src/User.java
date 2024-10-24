@@ -10,6 +10,12 @@ class User {
         this.userAge = userAge;
     }
 
+    public void viewDetails() {
+        System.out.println("ID: " + userID);
+        System.out.println("Name: " + userName);
+        System.out.println("Age: " + userAge);
+    }
+
     public String getUserID() {
         return userID;
     }
@@ -20,17 +26,5 @@ class User {
 
     public int getUserAge() {
         return userAge;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setUserAge(int userAge) {
-        this.userAge = userAge;
     }
 }
