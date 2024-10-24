@@ -12,7 +12,6 @@ public class Medical_InformationSystem {
     public static User login(String role) {
         Scanner scanner = new Scanner(System.in);
 
-        // Validate ID input
         String id;
         while (true) {
             System.out.print("\nID: ");
@@ -24,7 +23,6 @@ public class Medical_InformationSystem {
             }
         }
 
-        // Validate Name input
         String name;
         while (true) {
             System.out.print("Name: ");
@@ -38,7 +36,6 @@ public class Medical_InformationSystem {
             }
         }
 
-        // Validate Age input
         int age = -1;
         while (age < 0 || age > 150) {
             System.out.print("Age: ");
@@ -92,6 +89,8 @@ public class Medical_InformationSystem {
             // Handle actions for Patient users
             if (user instanceof Patient) {
                 Patient patient = (Patient) user;
+                patient.viewDetails();
+                patient.greetings();
                 while (true) {
                     // Display available options for the Patient
                     System.out.println("\n1. View Test Results");
@@ -132,6 +131,8 @@ public class Medical_InformationSystem {
             // Handle actions for Doctor users
             else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) user;
+                doctor.viewDetails();
+                doctor.greetings();
                 while (true) {
                     // Display available options for the Doctor
                     System.out.println("\n1. Add Patient");
@@ -142,8 +143,6 @@ public class Medical_InformationSystem {
                     String choice = scanner.nextLine();
 
                     if (choice.equals("1")) {
-                        // Add a new patient for the Doctor
-                        // Validate ID input
                         String patientId;
                         while (true) {
                             System.out.print("Patient ID: ");
@@ -155,7 +154,6 @@ public class Medical_InformationSystem {
                             }
                         }
 
-                        // Validate Name input
                         String patientName;
                         while (true) {
                             System.out.print("Patient Name: ");
@@ -169,7 +167,6 @@ public class Medical_InformationSystem {
                             }
                         }
 
-                        // Validate Age input
                         int patientAge = -1;
                         while (patientAge < 0 || patientAge > 150) {
                             System.out.print("Patient Age: ");
@@ -213,12 +210,10 @@ public class Medical_InformationSystem {
                             if(selectedPatient!=null){
                                 while (true) {
                                     System.out.println("\n1. Update Prescription");
-                                    System.out.println("2. Update Test Result");
-                                    System.out.println("3. View Test Results");
-                                    System.out.println("4. View Prescriptions");
-                                    System.out.println("5. Compute Billing");
-                                    System.out.println("6. Schedule Appointment");
-                                    System.out.println("7. Back");
+                                    System.out.println("2. View Test Results");
+                                    System.out.println("3. View Prescriptions");
+                                    System.out.println("4. Schedule Appointment");
+                                    System.out.println("5. Back");
                                     System.out.print("Enter choice: ");
                                     String subChoice = scanner.nextLine();
 
@@ -228,26 +223,20 @@ public class Medical_InformationSystem {
                                             doctor.updatePrescription(selectedPatient);
                                             break;
                                         case "2":
-                                            doctor.updateTestResult(selectedPatient);
-                                            break;
-                                        case "3":
                                             doctor.viewTestResults(selectedPatient);
                                             break;
-                                        case "4":
+                                        case "3":
                                             doctor.viewPrescriptions(selectedPatient);
                                             break;
-                                        case "5":
-                                            doctor.computeBilling(selectedPatient);
-                                            break;
-                                        case "6":
+                                        case "4":
                                             doctor.scheduleAppointment(selectedPatient);
                                             break;
-                                        case "7":
+                                        case "5":
                                             break;
                                         default:
                                             System.out.println("Invalid choice");
                                     }
-                                    if(subChoice.equals("7")){
+                                    if(subChoice.equals("5")){
                                         break;
                                     }
                                 }
@@ -270,6 +259,8 @@ public class Medical_InformationSystem {
             // Handle actions for Nurse users
             else if (user instanceof Nurse) {
                 Nurse nurse = (Nurse) user;
+                nurse.viewDetails();
+                nurse.greetings();
                 while (true) {
                     // Display available options for the Nurse
                     System.out.println("\n1. Add Patient");
@@ -280,7 +271,6 @@ public class Medical_InformationSystem {
                     String choice = scanner.nextLine();
 
                     if (choice.equals("1")) {
-                        // Validate ID input
                         String patientId;
                         while (true) {
                             System.out.print("Patient ID: ");
@@ -292,7 +282,6 @@ public class Medical_InformationSystem {
                             }
                         }
 
-                        // Validate Name input
                         String patientName;
                         while (true) {
                             System.out.print("Patient Name: ");
@@ -306,7 +295,6 @@ public class Medical_InformationSystem {
                             }
                         }
 
-                        // Validate Age input
                         int patientAge = -1;
                         while (patientAge < 0 || patientAge > 150) {
                             System.out.print("Patient Age: ");
@@ -352,9 +340,8 @@ public class Medical_InformationSystem {
                                 while (true) {
                                     System.out.println("\n1. View Test Results");
                                     System.out.println("2. View Prescriptions");
-                                    System.out.println("3. Compute Billing");
-                                    System.out.println("4. Schedule Appointment");
-                                    System.out.println("5. Back");
+                                    System.out.println("3. Schedule Appointment");
+                                    System.out.println("4. Back");
                                     System.out.print("Enter choice: ");
                                     String subChoice = scanner.nextLine();
 
@@ -367,17 +354,14 @@ public class Medical_InformationSystem {
                                             nurse.viewPrescriptions(selectedPatient);
                                             break;
                                         case "3":
-                                            nurse.computeBilling(selectedPatient);
-                                            break;
-                                        case "4":
                                             nurse.scheduleAppointment(selectedPatient);
                                             break;
-                                        case "5":
+                                        case "4":
                                             break;
                                         default:
                                             System.out.println("Invalid choice");
                                     }
-                                    if (subChoice.equals("5")){
+                                    if (subChoice.equals("4")){
                                         break;
                                     }
                                 }
